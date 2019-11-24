@@ -34,7 +34,13 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+
+  async created() {
+    const response = this.$axios.$get('/api')
+    console.log(response)
   }
+
 }
 </script>
 

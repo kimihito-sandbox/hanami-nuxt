@@ -1,6 +1,12 @@
 version: '3.7'
 
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
   api:
     build: .
     volumes:
@@ -8,13 +14,18 @@ services:
     command: bundle exec hanami server --host 0.0.0.0
     ports:
       - 2300:2300
+    depends_on:
+      - db
   frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+    command: yarn dev
+    environment:
+      HOST: '0.0.0.0'
     volumes:
-      - ./client:/client
-      - ./public:/public
+      - ./:/client
     ports:
       - 3000:3000
-  
+    depends_on:
+      - api

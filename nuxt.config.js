@@ -40,6 +40,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
@@ -56,5 +57,15 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+
+  proxy: {
+    '/api': 'http://api:2300'
+  },
+
+  srcDir: 'client/',
+
+  generate: {
+    dir: 'public'
   }
 }

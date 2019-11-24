@@ -2,9 +2,9 @@ FROM node:lts
 
 USER node
 
-RUN mkdir -p /public
-
 WORKDIR /client
 
-COPY client/ .
+COPY . .
+
+RUN yarn install
 
