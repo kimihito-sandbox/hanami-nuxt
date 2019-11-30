@@ -11,6 +11,7 @@ services:
     build: .
     volumes:
       - .:/app
+      - bundle:/usr/local/bundle
     command: bundle exec hanami server --host 0.0.0.0
     ports:
       - 2300:2300
@@ -25,7 +26,12 @@ services:
       HOST: '0.0.0.0'
     volumes:
       - ./:/client
+      - node_modules:/client/node_modules
     ports:
       - 3000:3000
     depends_on:
       - api
+
+volumes:
+  bundle:
+  node_modules:
